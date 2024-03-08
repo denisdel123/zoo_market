@@ -1,0 +1,28 @@
+asgiref==3.7.2
+asttokens==2.4.1
+certifi==2024.2.2
+cffi==1.16.0
+decorator==5.1.1
+distlib @ file:///private/tmp/python-distlib-20231212-4938-trhlvy/distlib-0.3.8
+Django==5.0.3
+executing==2.0.1
+filelock @ file:///private/tmp/python-filelock-20231112-5622-k62fq8/filelock-3.13.1/dist/filelock-3.13.1-py3-none-any.whl#sha256=57dbda9b35157b05fb3e58ee91448612eb674172fab98ee235ccb0b5bee19a1c
+ipython==8.22.1
+jedi==0.19.1
+matplotlib-inline==0.1.6
+packaging==23.2
+parso==0.8.3
+pexpect==4.9.0
+pillow==10.2.0
+platformdirs @ file:///private/tmp/python-platformdirs-20240130-5151-clzyvt/platformdirs-4.2.0
+prompt-toolkit==3.0.43
+psycopg2==2.9.9
+ptyprocess==0.7.0
+pure-eval==0.2.2
+pycparser @ file:///private/tmp/pycparser-20231211-25057-cypg40/pycparser-2.21
+Pygments==2.17.2
+six==1.16.0
+sqlparse==0.4.4
+stack-data==0.6.3
+traitlets==5.14.1
+wcwidth==0.2.13
