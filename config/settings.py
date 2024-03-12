@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'zooApp',
+        'NAME': 'zooapp',
         'USER': 'postgres',
-        'PASSWORD': '55555'
+        'PASSWORD': '55555',
     }
 }
 
