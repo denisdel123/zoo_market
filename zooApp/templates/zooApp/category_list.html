@@ -2,6 +2,28 @@
 
 {% block content %}
 {% include 'zooApp/includes/inc_menu.html' %}
-{% include 'zooApp/includes/inc_view.html' %}
+
+{% load my_tags %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4"></h1>
+</div>
+<div class="container">
+    <h1>Породы</h1>
+    <div class="row text-center">
+        {% for object in object_list %}
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ object }}</h4>
+                </div>
+                <div class="card-body">
+                    <img src="{{ object.photo|mymedia }}" width="200" height="200">
+                    <a href="{% url 'zooApp:dogs' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock %}

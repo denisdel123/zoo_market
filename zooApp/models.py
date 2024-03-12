@@ -8,7 +8,7 @@ NULLABLE = {
 
 class User(models.Model):
     first_name = models.CharField(**NULLABLE, max_length=30, verbose_name='Имя')
-    last_name = models.CharField(** NULLABLE, max_length=30, verbose_name='Фамилия')
+    last_name = models.CharField(**NULLABLE, max_length=30, verbose_name='Фамилия')
     age = models.IntegerField(**NULLABLE, verbose_name='Возраст')
     photo = models.ImageField(**NULLABLE, upload_to='user/', verbose_name='Фото')
     email = models.EmailField(**NULLABLE, verbose_name='Почта')
@@ -40,7 +40,7 @@ class Dog(models.Model):
     description = models.TextField(**NULLABLE, verbose_name='Описание')
     photo = models.ImageField(**NULLABLE, upload_to='dog/', verbose_name='Фото')
     price = models.IntegerField(verbose_name='Стоимость')
-    user_of = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Собственник')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Порода')
 
     def __str__(self):
         return f'{self.name}'
