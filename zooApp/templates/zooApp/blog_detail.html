@@ -1,0 +1,60 @@
+{% extends 'zooApp/base.html' %}
+
+{% block content %}
+{% include 'zooApp/includes/inc_menu.html' %}
+{% load my_tags %}
+<tr>
+    <h1>Карточка собаки</h1>
+</tr>
+<div class="image-container">
+
+
+    <img src="{{ object.photo|mymedia }}" width="200" height="200">
+</div>
+<div class="col-lg-9 col-md-6 col-sm-12">
+    <div class="card mb-4 box-shadow">
+        <div class="card-body">
+            <table class="table table-striped">
+                <tr>
+                    <td class="w-25">Заголовок</td>
+                    <td>{{ object.title }}</td>
+                </tr>
+                <tr>
+                    <td class="w-25">slug</td>
+                    <td>{{ object.slug }}</td>
+                </tr>
+                <tr>
+                    <td class="w-25">Описание</td>
+                    <td>{{ object.content }}</td>
+                </tr>
+
+                <tr>
+                    <td class="w-25">Просмотры</td>
+                    <td>{{ object.description }}</td>
+
+                </tr>
+
+
+                <tr>
+                    <td class="w-25">Время создания</td>
+                    <td>{{ object.created_at }}</td>
+                </tr>
+
+                <tr>
+                    <td class="w-25">Публикация</td>
+                    {% if object.published %}
+                    <td>Опубликовано</td>
+                    {% else %}
+                    <td>Не опубликовано</td>
+                    {% endif %}
+                </tr>
+
+            </table>
+
+            <a href="{% url 'zooApp:updateblog' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Редактировать</a>
+            <a href="#" class="btn btn-lg btn-block btn-outline-primary">удалить</a>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
