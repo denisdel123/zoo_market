@@ -3,7 +3,12 @@
 {% block content %}
 {% include 'zooApp/includes/inc_menu.html' %}
 {% load my_tags %}
+<tr>
+    <h1>Карточка собаки</h1>
+</tr>
 <div class="image-container">
+
+
     <img src="{{ object.photo|mymedia }}" width="200" height="200">
 </div>
 <div class="col-lg-9 col-md-6 col-sm-12">
@@ -13,6 +18,10 @@
                 <tr>
                     <td class="w-25">Кличка</td>
                     <td>{{ object.name }}</td>
+                </tr>
+                <tr>
+                    <td class="w-25">Порода</td>
+                    <td>{{ object.category }}</td>
                 </tr>
                 <tr>
                     <td class="w-25">Возраст</td>

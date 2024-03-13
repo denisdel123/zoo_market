@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 NULLABLE = {
     'blank': True,
@@ -52,11 +53,17 @@ class Dog(models.Model):
 
 class Blog(models.Model):
     title = models.CharField(max_length=100, verbose_name='Заголовок')
-    slug = models.CharField(max_length=50, verbose_name='slug')
-    description = models.TextField(verbose_name='Содержимое')
-    view_count = models.IntegerField(verbose_name='Просмотры')
+    slug = models.SlugField(max_length=50, verbose_name='slug')
+    content = models.TextField(verbose_name='Содержимое')
+    photo = models.ImageField(**NULLABLE, upload_to='blog_previews/', verbose_name='Превью')
+    view_count = models.IntegerField(default=0, verbose_name='Просмотры')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
-    published = models.BooleanField(default=True, verbose_name='Публикация')
+    published = models.BooleanField(default=False, verbose_name='Публикация')
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.title}'

@@ -8,7 +8,7 @@
     <h1 class="display-4"></h1>
 </div>
 <div class="container">
-    <h1>Породы</h1>
+    <h1>{{ title }}</h1>
     <div class="row text-center">
         {% for object in object_list %}
         <div class="col-3">
@@ -17,9 +17,17 @@
                     <h4 class="my-0 font-weight-normal">{{ object }}</h4>
                 </div>
                 <div class="card-body">
+
                     <img src="{{ object.photo|mymedia }}" width="200" height="200">
+                    {% if object.description %}
+                    <li>{{ object.description|truncatechars:50 }}</li>
+                    {% endif%}
+
                     <a href="{% url 'zooApp:dogs' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Перейти</a>
+
                     <a href="{% url 'zooApp:updatecategory' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Редактировать</a>
+                    <a href="{% url 'zooApp:deletecategory' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">удалить</a>
+
                 </div>
             </div>
         </div>
