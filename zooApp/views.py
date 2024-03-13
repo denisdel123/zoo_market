@@ -9,6 +9,18 @@ class CategoryListView(ListView):
     model = Category
 
 
+class CategoryCreateView(CreateView):
+    model = Category
+    fields = ('name', 'description', 'photo')
+    success_url = reverse_lazy('zooApp:category')
+
+
+class CategoryUpdateView(UpdateView):
+    model = Category
+    fields = ('name', 'description', 'photo')
+    success_url = reverse_lazy('zooApp:category')
+
+
 def main(request):
     context = {
         'title': 'Главная страница'
@@ -16,8 +28,19 @@ def main(request):
     return render(request, 'zooApp/main_list.html', context)
 
 
+def settings(request):
+    context = {
+        'title': 'Настройки'
+    }
+    return render(request, 'zooApp/settings.html')
+
+
 class DogsListView(ListView):
     model = Dog
+
+    def get_queryset(self):
+        category_pk = self.kwargs['pk']
+        return Dog.objects.filter(category__pk=category_pk)
 
 
 class DogDetailView(DetailView):
