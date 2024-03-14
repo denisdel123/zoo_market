@@ -30,7 +30,7 @@
 
                 <tr>
                     <td class="w-25">Просмотры</td>
-                    <td>{{ object.description }}</td>
+                    <td>{{ object.view_count }}</td>
 
                 </tr>
 
@@ -52,7 +52,7 @@
             </table>
 
             <a href="{% url 'zooApp:updateblog' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Редактировать</a>
-            <a href="#" class="btn btn-lg btn-block btn-outline-primary">удалить</a>
+            <a href="{% url 'zooApp:deleteblog' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">удалить</a>
 
         </div>
     </div>

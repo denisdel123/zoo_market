@@ -75,13 +75,13 @@ class DogDeleteView(DeleteView):
 
 class BlogCreateView(CreateView):
     model = Blog
-    fields = ('title', 'content', 'photo',)
+    fields = ('title', 'content', 'photo', 'published',)
     success_url = reverse_lazy('zooApp:main')
 
 
 class BlogUpdateView(UpdateView):
     model = Blog
-    fields = ('title', 'content', 'photo',)
+    fields = ('title', 'content', 'photo', 'published',)
     success_url = reverse_lazy('zooApp:main')
 
 
@@ -102,3 +102,8 @@ class BlogDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Публикация'
         return context
+
+
+class BlogDeleteView(DeleteView):
+    model = Blog
+    success_url = reverse_lazy('zooApp:main')
