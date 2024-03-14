@@ -6,6 +6,8 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
     <nav class="ms-5">
         <a class="p-2 btn btn-outline-primary" href="{% url 'zooApp:createblog' %}">Создать Публикацию</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'zooApp:main' %}">Опубликованные</a>
+
     </nav>
 </div>
 
@@ -16,8 +18,10 @@
 </div>
 <div class="container">
     <h1>{{ title }}</h1>
+
     <div class="row text-center">
         {% for object in object_list %}
+        {% if object.published == False %}
         <div class="col-3">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
@@ -35,8 +39,10 @@
                 </div>
             </div>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
+
 </div>
 
 {% endblock %}

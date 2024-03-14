@@ -3,7 +3,7 @@ from django.urls import path
 from zooApp.apps import ZooappConfig
 from zooApp.views import CategoryListView, DogsListView, DogDetailView, DogUpdateView, DogCreateView, \
     DogDeleteView, CategoryCreateView, CategoryUpdateView, settings, CategoryDeleteView, BlogCreateView, BlogListView, \
-    BlogUpdateView, BlogDetailView, BlogDeleteView
+    BlogUpdateView, BlogDetailView, BlogDeleteView, BlogUnpublishedListView
 
 app_name = ZooappConfig.name
 
@@ -23,6 +23,7 @@ urlpatterns = [
     path('<int:pk>dog/delete/', DogDeleteView.as_view(), name='deletedog'),
 
     path('', BlogListView.as_view(), name='main'),
+    path('unpublished', BlogUnpublishedListView.as_view(), name='unpublished'),
     path('blog/create/', BlogCreateView.as_view(), name='createblog'),
     path('<int:pk>blog/update/', BlogUpdateView.as_view(), name='updateblog'),
     path('<int:pk>blog/detail/', BlogDetailView.as_view(), name='detailblog'),
