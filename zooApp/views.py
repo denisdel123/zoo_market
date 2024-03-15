@@ -8,19 +8,31 @@ from zooApp.models import Category, Dog, Blog
 
 
 class CategoryListView(ListView):
+    """Наследовался от модели Category"""
     model = Category
+    """Указал максимальное кол-во карточек на странице (в CBV передает page_obj в контексте под капотом)"""
     paginate_by = 10
+    """Функция для передачи доп информации (контекста) в шаблон"""
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        """Добавили поле title и вернули с помощью return"""
         context['title'] = 'Породы'
         return context
 
 
+"""Класс для создания породы"""
+
+
 class CategoryCreateView(CreateView):
     model = Category
+    """Поля для которые нужно заполнить при создании"""
     fields = ('name', 'description', 'photo')
+    """Ссылка по умолчанию по которой пользователь будет переходить после создания породы"""
     success_url = reverse_lazy('zooApp:category')
+
+
+"""Класс для редактирования породы"""
 
 
 class CategoryUpdateView(UpdateView):
@@ -29,9 +41,15 @@ class CategoryUpdateView(UpdateView):
     success_url = reverse_lazy('zooApp:category')
 
 
+"""Класс удаление породы"""
+
+
 class CategoryDeleteView(DeleteView):
     model = Category
     success_url = reverse_lazy('zooApp:category')
+
+
+"""Метод ссылающийся на шаблон настройки"""
 
 
 def settings(request):
@@ -41,9 +59,14 @@ def settings(request):
     return render(request, 'zooApp/settings.html')
 
 
+"""Список собак"""
+
+
 class DogsListView(ListView):
     model = Dog
     paginate_by = 10
+
+    """Передача контекста"""
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -51,8 +74,13 @@ class DogsListView(ListView):
         return context
 
     def get_queryset(self):
+        """Извлекаем значение первичного ключа"""
         category_pk = self.kwargs['pk']
+        """Выполняем запрос к модели Dog и фильтруем по pk"""
         return Dog.objects.filter(category__pk=category_pk)
+
+
+"""Класс выводит конкретную собаку"""
 
 
 class DogDetailView(DetailView):
@@ -65,8 +93,12 @@ class DogCreateView(CreateView):
 
     success_url = reverse_lazy('zooApp:dog_detail')
 
+    """Метод передает pk для того что бы мы могли попасть в карточку только что созданной собаки"""
+
     def get_success_url(self):
+        """Получаем pk"""
         object_id = self.object.pk
+        """Передаем pk переходя по url"""
         detail_url = reverse_lazy('zooApp:dog_detail', kwargs={'pk': object_id})
         return detail_url
 
@@ -121,8 +153,12 @@ class BlogListView(ListView):
         return context
 
 
+"""Класс для не опубликованных блогов"""
+
+
 class BlogUnpublishedListView(ListView):
     model = Blog
+    paginate_by = 10
     template_name = 'zooApp/blog_unpublished.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -134,6 +170,8 @@ class BlogUnpublishedListView(ListView):
 class BlogDetailView(DetailView):
     model = Blog
 
+    """Метод для отслеживания просмотров"""
+
     def get(self, request, *args, **kwargs):
         blog = self.get_object()
 
@@ -142,6 +180,8 @@ class BlogDetailView(DetailView):
         blog.save()
 
         return super().get(request, *args, **kwargs)
+
+    """Создание человекочитаймого slug переводит с русского языка на английский"""
 
     def create_slug(self, title):
         return translit(title, 'ru', reversed=True)
