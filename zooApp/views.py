@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.utils.text import slugify
+
 from transliterate import translit
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
 
@@ -9,6 +9,7 @@ from zooApp.models import Category, Dog, Blog
 
 class CategoryListView(ListView):
     model = Category
+    paginate_by = 10
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -42,6 +43,7 @@ def settings(request):
 
 class DogsListView(ListView):
     model = Dog
+    paginate_by = 10
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -61,22 +63,22 @@ class DogCreateView(CreateView):
     model = Dog
     fields = ('name', 'age', 'description', 'photo', 'price', 'category')
 
-    success_url = reverse_lazy('zooApp:dogdetail')
+    success_url = reverse_lazy('zooApp:dog_detail')
 
     def get_success_url(self):
         object_id = self.object.pk
-        detail_url = reverse_lazy('zooApp:dogdetail', kwargs={'pk': object_id})
+        detail_url = reverse_lazy('zooApp:dog_detail', kwargs={'pk': object_id})
         return detail_url
 
 
 class DogUpdateView(UpdateView):
     model = Dog
     fields = ('name', 'age', 'description', 'photo', 'price', 'category')
-    success_url = reverse_lazy('zooApp:dogdetail')
+    success_url = reverse_lazy('zooApp:dog_detail')
 
     def get_success_url(self):
         object_id = self.object.pk
-        detail_url = reverse_lazy('zooApp:dogdetail', kwargs={'pk': object_id})
+        detail_url = reverse_lazy('zooApp:dog_detail', kwargs={'pk': object_id})
         return detail_url
 
 
@@ -88,22 +90,22 @@ class DogDeleteView(DeleteView):
 class BlogCreateView(CreateView):
     model = Blog
     fields = ('title', 'content', 'photo', 'published',)
-    success_url = reverse_lazy('zooApp:detailblog')
+    success_url = reverse_lazy('zooApp:detail_blog')
 
     def get_success_url(self):
         object_id = self.object.pk
-        detail_url = reverse_lazy('zooApp:detailblog', kwargs={'pk': object_id})
+        detail_url = reverse_lazy('zooApp:detail_blog', kwargs={'pk': object_id})
         return detail_url
 
 
 class BlogUpdateView(UpdateView):
     model = Blog
     fields = ('title', 'content', 'photo', 'published',)
-    success_url = reverse_lazy('zooApp:detailblog')
+    success_url = reverse_lazy('zooApp:detail_blog')
 
     def get_success_url(self):
         object_id = self.object.pk
-        detail_url = reverse_lazy('zooApp:detailblog', kwargs={'pk': object_id})
+        detail_url = reverse_lazy('zooApp:detail_blog', kwargs={'pk': object_id})
         return detail_url
 
 

@@ -23,7 +23,7 @@
                     <li>{{ object.description|truncatechars:50 }}</li>
                     {% endif%}
 
-                    <a href="{% url 'zooApp:dogdetail' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Перейти</a>
+                    <a href="{% url 'zooApp:dog_detail' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Перейти</a>
 
                 </div>
             </div>
@@ -31,5 +31,7 @@
         {% endfor %}
     </div>
 </div>
+
+{% include 'zooApp/includes/inc_paginate.html' %}
 
 {% endblock %}

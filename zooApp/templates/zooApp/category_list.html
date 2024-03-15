@@ -25,8 +25,8 @@
 
                     <a href="{% url 'zooApp:dogs' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Перейти</a>
 
-                    <a href="{% url 'zooApp:updatecategory' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Редактировать</a>
-                    <a href="{% url 'zooApp:deletecategory' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">удалить</a>
+                    <a href="{% url 'zooApp:update_category' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Редактировать</a>
+                    <a href="{% url 'zooApp:delete_category' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">удалить</a>
 
                 </div>
             </div>
@@ -34,5 +34,7 @@
         {% endfor %}
     </div>
 </div>
+
+{% include 'zooApp/includes/inc_paginate.html' %}
 
 {% endblock %}
